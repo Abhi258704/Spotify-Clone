@@ -1,4 +1,3 @@
-
 console.log('JS is runnin');
 let currentSong = new Audio();
 let songs;
@@ -14,7 +13,7 @@ function secondsToMinSec(seconds) {
 async function getSongs(folder) {
     try {
         currFolder = folder;
-        let response = await fetch(`/${folder}/`);
+        let response = await fetch(`${folder}/`);
         let html = await response.text();
 
         let div = document.createElement("div");
@@ -24,19 +23,20 @@ async function getSongs(folder) {
         songs = [];
         for (let a of anchors) {
             if (a.href.endsWith(".mp3")) {
-                songs.push(a.href.split(`/${folder}/`)[1]);
+                songs.push(a.href.split(`${folder}/`)[1]);  // Update this line
             }
+
         }
 
         // Get the folder cover image path
-        let coverImage = `/${folder}/cover.jpeg`; // Default path
-        
+        let coverImage = `${folder}/cover.jpeg`; // Default path
+
         // Try to fetch album info if available
         try {
             let infoResponse = await fetch(`/${folder}/info.json`);
             let info = await infoResponse.json();
             if (info.cover) {
-                coverImage = `/${folder}/${info.cover}`;
+                coverImage = `${folder}/${info.cover}`;
             }
         } catch (e) {
             console.log("No info.json found, using default cover");
@@ -77,15 +77,15 @@ const playMusic = (track, pause = false) => {
     document.querySelectorAll('.songList ul li').forEach(li => {
         li.classList.remove('playing');
     });
-    
-    currentSong.src = `/${currFolder}/` + track
+
+    currentSong.src = `${currFolder}/` + track
     if (!pause) {
         currentSong.play()
         pl.src = "images/pause.svg"
     }
 
 
-     // Add playing class to the current song's li
+    // Add playing class to the current song's li
     const currentLi = document.querySelector(`.songList ul li[data-song="${track}"]`);
     if (currentLi) {
         currentLi.classList.add('playing');
@@ -110,7 +110,7 @@ const playMusic = (track, pause = false) => {
 
 async function displayAlbums() {
     try {
-        let response = await fetch(`/songs/`);
+        let response = await fetch(`songs/`);
         let html = await response.text();
         let div = document.createElement("div");
         div.innerHTML = html;
@@ -132,11 +132,11 @@ async function displayAlbums() {
                         let r = await response.json();
 
                         // Use dynamic folder name in data attribute
-                        cards.innerHTML += `<div data-folder="${folder}" class="card-s">
+                                                cards.innerHTML += `<div data-folder="${folder}" class="card-s">
                             <div class="play">
                                 <img src="images/play2.svg" alt="">
                             </div>
-                            <img src="/songs/${folder}/cover.jpeg" alt="">
+                            <img src="songs/${folder}/cover.jpeg" alt="">  <!-- Remove leading slash -->
                             <h4>${r.title}</h4>
                             <p>${r.description}</p>
                         </div>`;
@@ -269,4 +269,3 @@ async function main() {
 }
 
 main()
-

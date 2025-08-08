@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+  command = "echo 'No build needed'"
+
+[[headers]]
+  for = "/*.mp3"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "audio/mpeg"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "image/jpeg"
