@@ -1,4 +1,4 @@
-const BASE_URL = "https://https://marvelous-dragon-7a4b5e.netlify.app/";
+
 
 console.log('JS is runnin');
 let currentSong = new Audio();
@@ -15,7 +15,7 @@ function secondsToMinSec(seconds) {
 async function getSongs(folder) {
     try {
         currFolder = folder;
-        let response = await fetch(`${BASE_URL}/${folder}/`);
+        let response = await fetch(`/${folder}/`);
         let html = await response.text();
 
         let div = document.createElement("div");
@@ -30,11 +30,11 @@ async function getSongs(folder) {
         }
 
         // Get the folder cover image path
-        let coverImage = `${BASE_URL}/${folder}/cover.jpeg`; // Default path
+        let coverImage = `/${folder}/cover.jpeg`; // Default path
         
         // Try to fetch album info if available
         try {
-            let infoResponse = await fetch(`${BASE_URL}/${folder}/info.json`);
+            let infoResponse = await fetch(`/${folder}/info.json`);
             let info = await infoResponse.json();
             if (info.cover) {
                 coverImage = `/${folder}/${info.cover}`;
@@ -79,7 +79,7 @@ const playMusic = (track, pause = false) => {
         li.classList.remove('playing');
     });
     
-    currentSong.src = `${BASE_URL}/${currFolder}/` + track
+    currentSong.src = `/${currFolder}/` + track
     if (!pause) {
         currentSong.play()
         pl.src = "images/pause.svg"
@@ -111,7 +111,7 @@ const playMusic = (track, pause = false) => {
 
 async function displayAlbums() {
     try {
-        let response = await fetch(`${BASE_URL}/songs/`);
+        let response = await fetch(`/songs/`);
         let html = await response.text();
         let div = document.createElement("div");
         div.innerHTML = html;
@@ -129,7 +129,7 @@ async function displayAlbums() {
                     let folder = parts[songsIndex + 1];
 
                     try {
-                        let response = await fetch(`${BASE_URL}/songs/${folder}/info.json`);
+                        let response = await fetch(`/songs/${folder}/info.json`);
                         let r = await response.json();
 
                         // Use dynamic folder name in data attribute
@@ -137,7 +137,7 @@ async function displayAlbums() {
                             <div class="play">
                                 <img src="images/play2.svg" alt="">
                             </div>
-                            <img src="${BASE_URL}/songs/${folder}/cover.jpeg" alt="">
+                            <img src="/songs/${folder}/cover.jpeg" alt="">
                             <h4>${r.title}</h4>
                             <p>${r.description}</p>
                         </div>`;
