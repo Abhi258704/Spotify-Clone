@@ -715,6 +715,10 @@ p {
     .playbar{
         bottom: 0;
     }
+
+    .card{
+        display: none;
+    }
     /* .card-s{
         height: 330px;
         width: 100%;
@@ -738,7 +742,7 @@ p {
         left: -120%;
         transition: all .3s;
         z-index: 3;
-        width: 373px;
+        width: 343px;
         z-index: 1000;
         height: 90%;
     }
