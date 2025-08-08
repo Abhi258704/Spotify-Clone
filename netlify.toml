@@ -13,3 +13,14 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Content-Type = "image/jpeg"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/songs/*"
+  [headers.values]
+    Content-Type = "audio/mpeg"
+    X-Content-Type-Options = "nosniff"
