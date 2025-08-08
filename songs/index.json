@@ -1,0 +1,14 @@
+  [
+    {
+    "folder": "ncs",
+    "title": "NCS Collection",
+    "description": "NoCopyrightSounds tracks",
+    "cover": "cover.jpeg"
+  },
+  {
+    "folder": "rock",
+    "title": "Chill Vibes",
+    "description": "Relaxing and ambient music",
+    "cover": "cover.jpeg"
+  }
+]
